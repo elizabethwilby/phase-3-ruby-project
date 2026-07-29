@@ -18,6 +18,10 @@ gem "require_all", "~> 3.0"
 
 gem "standalone_migrations"
 
+gem "colorize"
+
+gem "ostruct"
+
 # These gems will only be used when we are running the application locally
 group :development do
   gem "pry", "~> 0.14.1"
@@ -32,3 +36,4 @@ group :test do
   gem "database_cleaner", "~> 2.0"
   gem "rspec", "~> 3.10"
 end
+
