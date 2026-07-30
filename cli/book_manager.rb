@@ -148,7 +148,7 @@ class BookManager
 
   # 3.3
   def delete_theme_note(book)
-    print "Enter the theme note number for this book: "
+    print "Enter the note number for this book: "
     position = gets.chomp.to_i
 
     note = book.theme_notes[position - 1]
