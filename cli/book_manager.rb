@@ -70,7 +70,7 @@ class BookManager
     end
   end
 
-  # 3 helper, finds the book by title 
+  # 3 helper
   def find_book_by_title(title)
     Book.find_by("LOWER(title) = ?", title.downcase)
   end
