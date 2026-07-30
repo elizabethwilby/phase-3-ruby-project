@@ -1,3 +1,5 @@
+require "colorize"
+
 class Menu
   def initialize
     @manager = BookManager.new
@@ -35,14 +37,14 @@ class Menu
     puts "What would you like to do?"
     puts "1. View all books"
     puts "2. Add new book"
-    puts "3. View a book"
-    puts "4. Update or edit a book"
+    puts "3. Find a book"
+    puts "4. Edit a book"
     puts "5. Delete a book"
     puts "6. Exit"
     print ">"
   end
 
-  # 3 - navigation shell, calls out to BookManager for the database work
+  # 3 
   def view_book
     print "Enter book title: "
     title = gets.chomp
@@ -50,7 +52,7 @@ class Menu
     book = @manager.find_book_by_title(title)
 
     if book.nil?
-      puts "No book with this title."
+      puts "No book with this title.".colorize(:yellow)
       return
     end
 

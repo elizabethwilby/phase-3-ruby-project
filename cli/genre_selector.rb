@@ -16,7 +16,7 @@ class GenreSelector
 
     selections.each do |num|
       if num.between?(1, GENRES.length)
-        chosen << GENRES[num - 1]
+        chosen << GENRES[num - 1] unless chosen.include?(GENRES[num - 1])
       elsif num == GENRES.length + 1
         print "Enter custom genre: "
         chosen << gets.chomp
