@@ -4,6 +4,7 @@ class BookManager
 
   def success(message)
     puts message.colorize(:green)
+    puts ("-" * 20).colorize(:green)
   end
 
   def error(message)
@@ -17,6 +18,7 @@ class BookManager
   def label(text)
     puts text.colorize(:cyan)
   end
+
   # 1
   def view_all_books
     books = Book.all
@@ -25,7 +27,7 @@ class BookManager
     else
       success "Here they are: "
       books.each do |book|
-        label "#{book.id}. #{book.title} by #{book.author}, #{book.page_count} pages"
+        label "#{book.id} #{book.title} by #{book.author}, #{book.page_count} pages"
       end
     end
   end
@@ -63,13 +65,12 @@ class BookManager
 
     if book.persisted?
       success "#{book.title} was added!"
-      success "-" * 20
     else
       error "Something went wrong: #{book.errors.full_messages.join(", ")}"
     end
   end
 
-  # 3 helper - finds the book by title (case-insensitive)
+  # 3 helper, finds the book by title 
   def find_book_by_title(title)
     Book.find_by("LOWER(title) = ?", title.downcase)
   end
@@ -109,7 +110,6 @@ class BookManager
 
     if note.persisted?
       success "Theme note added!"
-      success "-" * 20
     else
       error "Something went wrong :/ sry "
     end
@@ -141,7 +141,6 @@ class BookManager
 
     if note.save
       success "Theme note updated successfully"
-      success "-" * 20
     else
       error "Error occured updating note"
     end
@@ -165,21 +164,20 @@ class BookManager
     if confirmation == "y"
       note.destroy
       success "Note deleted"
-      success "-" * 20
     else
-      warning "Deletion cancled"
+      warning "Deletion canceled"
     end
   end
 
   # 4
   def update_book
-    print "Enter book ID: "
-    id = gets.chomp.to_i
+    print "Enter book title: "
+    title = gets.chomp
 
-    book = Book.find_by(id: id)
+    book = find_book_by_title(title)
 
     if book.nil?
-      warning "No book listed with ID"
+      warning "No book listed under this title"
       return
     end
 
@@ -205,7 +203,6 @@ class BookManager
 
     if book.save
       success "Book updated!"
-      success "-" * 20
     else
       error "Error updating #{book.errors.full_messages.join(", ")}"
     end
@@ -216,7 +213,7 @@ class BookManager
     print "Enter book title: "
     title = gets.chomp
 
-    book = Book.find_by(id: id)
+    book = find_book_by_title(title)
 
     if book.nil?
       warning "No book listed under title"
@@ -229,9 +226,8 @@ class BookManager
     if confirm == "y"
       book.destroy
       success "#{book.title} was deleted."
-      success "-" * 20
     else
-      warning "Cancled"
+      warning "Canceled"
     end
   end
 end

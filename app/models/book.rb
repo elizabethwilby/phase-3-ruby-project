@@ -3,4 +3,4 @@ class Book < ActiveRecord::Base
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }
   validates :page_count, numericality: { greater_than: 0 }
-end
+end 
